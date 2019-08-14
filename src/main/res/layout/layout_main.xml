@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请选择登录方式"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
+            android:textColor="#000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <ImageButton
+                    android:id="@+id/ib_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/facebook1"
+                    />
+                <TextView
+                    android:id="@+id/tv_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Facebook"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/ib_facebook"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#00000f"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <ImageButton
+                    android:id="@+id/ib_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/email1"
+                    />
+                <TextView
+
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="邮箱登录"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/ib_mail"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#00000f"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <ImageButton
+                    android:id="@+id/ib_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/visitor1"
+                    />
+                <TextView
+                    android:id="@+id/tv_cusLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="游客试玩"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/ib_custom"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#00000f"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="260dp"
+        android:background="#fff"
+
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textSize="8dp"
+
+                android:layout_centerVertical="true"
+                android:background="@drawable/dialogbackgroud"
+                android:layout_marginLeft="10dp"
+                android:text="切换账号"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#000"
+                android:text="账号中心"
+                />
+
+            <ImageButton
+                android:id="@+id/ib_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/x"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="#f0f0f0"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/ib_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/yx"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_test"
+                    android:layout_toRightOf="@+id/ib_test"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="account"/>
+
+
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tv_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="ID:00000000"/>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+            <Button
+                android:layout_width="0dp"
+                android:background="#1E90FF"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="礼包"
+                android:textColor="#fff"
+                android:layout_height="wrap_content" />
+            <Button
+            android:id="@+id/b_change_psw"
+            android:layout_width="0dp"
+            android:background="#1E90FF"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="修改密码"
+            android:textColor="#fff"
+            android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="#1E90FF"
+                android:layout_margin="5dp"
+                android:text="购买记录"
+                android:textColor="#fff"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="#1E90FF"
+                android:layout_margin="5dp"
+                android:text="客服中心"
+                android:textColor="#fff"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

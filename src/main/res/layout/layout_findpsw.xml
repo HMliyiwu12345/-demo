@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:background="#fff"
+
+        >
+
+        <RelativeLayout
+            android:id="@+id/rl_tittle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:src="@drawable/back" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="找回密码"
+                android:textColor="#000"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_admin"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_below="@+id/rl_tittle">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+
+                <ImageButton
+                    android:id="@+id/ib_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:src="@drawable/mm" />
+
+                <EditText
+                    android:id="@+id/et_mail"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@+id/ib_account"
+                    android:background="@null"
+                    android:hint="请输入绑定的邮箱"
+                    android:singleLine="true" />
+
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f0f0f0"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_psw"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_below="@+id/rl_admin">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true">
+
+                <ImageButton
+                    android:id="@+id/ib_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:src="@drawable/mm" />
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@+id/ib_password"
+                    android:background="@null"
+                    android:hint="请输入验证码 "
+                    android:password="true"
+                    android:singleLine="true" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_go_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+
+                    android:text="发送验证码"
+                    android:textColor="#1E90FF" />
+            </FrameLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f0f0f0"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_psw">
+
+            <Button
+                android:id="@+id/b_sure"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+
+                android:text="下一步"
+                android:textColor="#fff"
+                android:textSize="20dp"
+
+                />
+        </RelativeLayout>
+        <!--android:background="#1E90FF"-->
+
+    </RelativeLayout>
+
+</LinearLayout>
