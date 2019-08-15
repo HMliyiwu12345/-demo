@@ -121,7 +121,12 @@ public class WaitDialog extends BaseDialog {
 
             @Override
             public void fail(Exception e) {
-                WYLog.e(e.getMessage());
+//                WYLog.e(e.getMessage());
+                ToastUtil.showToast(getActivity(), "网络好像出了点问题");
+
+                MainDialog.newInstance(getActivity(), "").show(getActivity().getSupportFragmentManager(), "MAIN");
+                getDialog().dismiss();
+
             }
         });
     }
@@ -135,7 +140,8 @@ public class WaitDialog extends BaseDialog {
                 if (!TextUtils.isEmpty(s)) {
                     Gson gson = new Gson();
                     CustomData customData = gson.fromJson(s, CustomData.class);
-                    if (customData.getStatus() == 0) {
+                    if (customData.getStatus() == 0 ) {
+                        WYLog.d(customData.getMsg());
                         SpUtil.putString(getActivity(),"user_id",customData.getDatas().getUser_id());
                         ToastUtil.showToast(getActivity(), "登陆成功");
                         BoundDialog boundDialog = BoundDialog.newInstance(customData.getDatas().getUser_id(),customData.getDatas().getLogin_token());
@@ -152,7 +158,12 @@ public class WaitDialog extends BaseDialog {
 
             @Override
             public void fail(Exception e) {
-                WYLog.e(e.getMessage());
+//                WYLog.e(e.getMessage());
+
+                ToastUtil.showToast(getActivity(), "网络好像出了点问题");
+
+                MainDialog.newInstance(getActivity(), "").show(getActivity().getSupportFragmentManager(), "MAIN");
+                getDialog().dismiss();
 
             }
         });

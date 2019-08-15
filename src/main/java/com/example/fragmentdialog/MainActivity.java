@@ -21,7 +21,6 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.example.fragmentdialog.fragmentdialog.MainDialog;
 import com.example.fragmentdialog.fragmentdialog.WaitDialog;
 import com.example.fragmentdialog.util.SpUtil;
-import com.example.fragmentdialog.util.WYLog;
 import com.example.httpclient.util.ToastUtil;
 
 import java.util.ArrayList;

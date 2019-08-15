@@ -148,7 +148,11 @@ public class LoginDialog extends BaseDialog implements View.OnClickListener {
 
                     @Override
                     public void fail(Exception e) {
-                        WYLog.e( e.getMessage());
+                        ToastUtil.showToast(getActivity(), "网络好像出了点问题");
+
+                        MainDialog.newInstance(getActivity(), "").show(getActivity().getSupportFragmentManager(), "MAIN");
+                        getDialog().dismiss();
+
                     }
                 });
             } else {
