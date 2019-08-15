@@ -14,10 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.fragmentdialog.R;
+import com.example.fragmentdialog.util.SpUtil;
 
 public class BoundDialog extends BaseDialog {
 
-    private int user_id,cancle,bound_mail;
+    private int user_id,cancle,bound_mail,change_admin;
     private static BoundDialog fragment;
     private String id,login;
 
@@ -72,6 +73,18 @@ public class BoundDialog extends BaseDialog {
 
                 BoundEmailDialog.newInstance(id,login)
                         .show(getActivity().getSupportFragmentManager(),"EMAILBOUND");
+                getDialog().dismiss();
+            }
+        });
+        //切换账号
+        change_admin=getResources().getIdentifier("b_change_admin","id",getActivity().getPackageName());
+        Button b_change_admin=view.findViewById(change_admin);
+        b_change_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SpUtil.putString(getContext(),"account",null);
+                SpUtil.putString(getActivity(),"user_id","");
+                MainDialog.newInstance(getActivity(), "").show(getActivity().getSupportFragmentManager(), "MAIN");
                 getDialog().dismiss();
             }
         });

@@ -17,6 +17,7 @@
             android:layout_height="50dp">
 
             <Button
+                android:id="@+id/b_change_admin"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:textSize="8dp"

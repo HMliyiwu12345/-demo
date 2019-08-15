@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.fragmentdialog.R;
+import com.example.fragmentdialog.util.SpUtil;
 
 public class EmailDialog extends BaseDialog implements View.OnClickListener {
-    private int accout,id,cancle,alterPsw;
+    private int accout,id,cancle,alterPsw,change_admin;
     private String userId;
     private String login;
     private String account;
@@ -59,6 +61,9 @@ public class EmailDialog extends BaseDialog implements View.OnClickListener {
         view.findViewById(cancle).setOnClickListener(this);
         alterPsw=getResources().getIdentifier("b_change_psw","id",getActivity().getPackageName());
         view.findViewById(alterPsw).setOnClickListener(this);
+        change_admin=getResources().getIdentifier("b_change_admin","id",getActivity().getPackageName());
+        Button b_change_admin=view.findViewById(change_admin);
+        b_change_admin.setOnClickListener(this);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -70,6 +75,16 @@ public class EmailDialog extends BaseDialog implements View.OnClickListener {
         if(view.getId()==alterPsw){
             alterPsw();
         }
+        if(view.getId()==change_admin){
+            changeAdmin();
+        }
+    }
+
+    private void changeAdmin() {
+        SpUtil.putString(getContext(),"account",null);
+        SpUtil.putString(getActivity(),"user_id","");
+        MainDialog.newInstance(getActivity(), "").show(getActivity().getSupportFragmentManager(), "MAIN");
+        getDialog().dismiss();
     }
 
     private void alterPsw() {
