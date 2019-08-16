@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.fragmentdialog.R;
 import com.example.fragmentdialog.util.SpUtil;
+import com.example.fragmentdialog.util.WYLog;
 
 public class EmailDialog extends BaseDialog implements View.OnClickListener {
     private int accout,id,cancle,alterPsw,change_admin;
@@ -48,6 +49,7 @@ public class EmailDialog extends BaseDialog implements View.OnClickListener {
         savedInstanceState=getArguments();
         userId = savedInstanceState.getString("id","111");
         login = savedInstanceState.getString("login","login");
+//        WYLog.d("id="+userId+"====login="+login);
         account = savedInstanceState.getString("account","account");
         accout=getResources().getIdentifier("tv_test","id",getActivity().getPackageName());
         TextView tv_account=view.findViewById(accout);
