@@ -6,11 +6,11 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.fragmentdialog"
+        applicationId "com.zerogame.sdktest"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 8
+        versionName "8.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -19,6 +19,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+//            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,7 +35,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-  implementation 'com.android.billingclient:billing:2.0.1'
+  implementation  'com.android.billingclient:billing:1.2'
     implementation files('libs\\classes.jar')
     implementation files('libs\\gson-2.8.5.jar')
 
