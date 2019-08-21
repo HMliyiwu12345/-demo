@@ -1,27 +1,19 @@
 package com.zerogame.fragmentdialog;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-
 import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingClientStateListener;
-
-import com.android.billingclient.api.BillingFlowParams;
-//import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
-import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.zerogame.fragmentdialog.bean.GooglePay;
 import com.zerogame.fragmentdialog.billing.BillingManager;
-//import com.zerogame.fragmentdialog.billing.BillingProvider;
 import com.zerogame.fragmentdialog.billing.BillingProvider;
 import com.zerogame.fragmentdialog.fragmentdialog.MainDialog;
 import com.zerogame.fragmentdialog.fragmentdialog.WaitDialog;
@@ -33,8 +25,6 @@ import com.example.httpclient.util.ToastUtil;
 import com.google.gson.Gson;
 import com.zerogame.fragmentdialog.util.WYLog;
 import com.zerogame.sdktest.R;
-
-
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,15 +51,19 @@ public class MainActivity extends AppCompatActivity implements BillingProvider {
         }
         mBillingManager=getBillingManager();
 
+
+
         google = findViewById(R.id.b_google);
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (!TextUtils.isEmpty(SpUtil.getString(MainActivity.this, "account", null))) {
                     if (!SpUtil.getString(MainActivity.this, "account", null).equals("customLogin")) {
                         String path = Constant.getURL(MainActivity.this, "Pay/gg_pay", "49787", "23179fdc1487017f9eb70f1ca3cf17fc", null);
                         String player_server = URLEncoder.encode("一区");
                         String md5_post = SignUtil.MD5("1111111111com.cc11111110LFAS0FJWET439FASLHF3089FGDHO3FDSVCX0");
+
                         HashMap<String, String> maps = new HashMap<String, String>();
                         maps.put("extend", "1111111111");
                         maps.put("productId", "com.cc");
@@ -82,11 +76,33 @@ public class MainActivity extends AppCompatActivity implements BillingProvider {
                         new HttpPostUtil().postHttp(path, maps, new HttpPostUtil.Enqueue() {
                             @Override
                             public void success(String s) {
-
                                 Gson gson = new Gson();
                                 GooglePay googlePay = gson.fromJson(s, GooglePay.class);
                                 if (googlePay.getStatus() == 0) {
-                                    GooglePay(googlePay.getDatas().getPay_order_number());
+                                    final List skuList = new ArrayList<>();
+                                    skuList.add("com.cc");
+                                    mBillingManager.querySkuDetailsAsync(BillingClient.SkuType.INAPP, skuList, new SkuDetailsResponseListener() {
+                                        @Override
+                                        public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+//                                            ToastUtil.showToast(MainActivity.this, String.valueOf(skuDetailsList.size()));
+                                            if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+
+                                            } else if (skuDetailsList != null && skuDetailsList.size() > 0) {
+
+                                                for (SkuDetails details : skuDetailsList) {
+
+                                                    GooglePay(details);
+
+                                                    //获取到所查商品信息
+
+                                                }
+                                            } else {
+                                                //没有要消耗的产品
+//                        Toast.makeText(PayActivity.this, "没有要查询的产品", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+
                                 }
 
                             }
@@ -109,8 +125,8 @@ public class MainActivity extends AppCompatActivity implements BillingProvider {
 
     }
 
-    private void GooglePay(final String purchaseId) {
-        mBillingManager.initiatePurchaseFlow(purchaseId,BillingClient.SkuType.INAPP);
+    private void GooglePay(final SkuDetails skuDetails) {
+        mBillingManager.initiatePurchaseFlow(skuDetails,BillingClient.SkuType.INAPP);
 
     }
 
@@ -145,31 +161,31 @@ public class MainActivity extends AppCompatActivity implements BillingProvider {
         @Override
         public void onBillingClientSetupFinished() {
 //            通过商品ID，去查询Google后台是否有该ID的商品
-            final List skuList = new ArrayList<>();
-            skuList.add("S5P_32_20190820134403cZL5");
-            mBillingManager.querySkuDetailsAsync(BillingClient.SkuType.INAPP, skuList, new SkuDetailsResponseListener() {
-                @Override
-                public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
-                    if (responseCode != BillingClient.BillingResponse.OK) {
-
-                    } else if (skuDetailsList != null && skuDetailsList.size() > 0) {
-
-                        for (SkuDetails details : skuDetailsList) {
-
-                            //获取到所查商品信息
-                        }
-                    } else {
-                        //没有要消耗的产品
-//                        Toast.makeText(PayActivity.this, "没有要查询的产品", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+//            final List skuList = new ArrayList<>();
+//            skuList.add("S5P_32_20190820134403cZL5");
+//            mBillingManager.querySkuDetailsAsync(BillingClient.SkuType.INAPP, skuList, new SkuDetailsResponseListener() {
+//                @Override
+//                public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+//                    if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+//
+//                    } else if (skuDetailsList != null && skuDetailsList.size() > 0) {
+//
+//                        for (SkuDetails details : skuDetailsList) {
+//
+//                            //获取到所查商品信息
+//                        }
+//                    } else {
+//                        //没有要消耗的产品
+////                        Toast.makeText(PayActivity.this, "没有要查询的产品", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            });
 
 
         }
 
         @Override
-        public void onConsumeFinished(String token, @BillingClient.BillingResponse int result) {
+        public void onConsumeFinished(String token, @BillingClient.BillingResponseCode int result) {
 
 //            Toast.makeText(PayActivity.this, "消耗完成", Toast.LENGTH_LONG).show();
             // Note: We know this is the SKU_GAS, because it's the only one we consume, so we don't
@@ -179,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements BillingProvider {
             // It could be done by maintaining a map (updating it every time you call consumeAsync)
             // of all tokens into SKUs which were scheduled to be consumed and then looking through
             // it here to check which SKU corresponds to a consumed token.
-            if (result == BillingClient.BillingResponse.OK) {
+            if (result == BillingClient.BillingResponseCode.OK) {
                 // Successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 //消耗成功
@@ -193,11 +209,15 @@ public class MainActivity extends AppCompatActivity implements BillingProvider {
         public void onPurchasesUpdated(List<Purchase> purchaseList) {
             for (Purchase purchase : purchaseList) {
                 //拿到订单信息，做自己的处理，发生到服务端验证订单信息，然后去消耗
-
+//                purchase.getOrderId();
                 //购买成功，拿着令牌 去消耗
 //                Toast.makeText(PayActivity.this, "购买成功：" + purchase.getPurchaseToken(), Toast.LENGTH_LONG).show();
                 // We should consume the purchase and fill up the tank once it was consumed
-                mBillingManager.consumeAsync(purchase.getPurchaseToken());
+                ToastUtil.showToast(MainActivity.this,purchase.getOrderId());
+                ConsumeParams consumeParams=ConsumeParams.newBuilder().
+                        setPurchaseToken(purchase.getPurchaseToken()).setDeveloperPayload(purchase.getDeveloperPayload()).build();
+
+                mBillingManager.consumeAsync(consumeParams);
             }
         }
     }
