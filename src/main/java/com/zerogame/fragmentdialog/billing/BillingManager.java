@@ -19,9 +19,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-
 import androidx.annotation.Nullable;
-
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClient.FeatureType;
 import com.android.billingclient.api.BillingClient.SkuType;
@@ -130,32 +128,19 @@ public class BillingManager implements PurchasesUpdatedListener {
      * 更新到2.0.3
      * Handle a callback that purchases were updated from the Billing library
      */
-//    @Override
-//    public void onPurchasesUpdated(int resultCode, List<Purchase> purchases) {
-//        if (resultCode == BillingResponse.OK) {
-//            for (Purchase purchase : purchases) {
-//                handlePurchase(purchase);
-//            }
-//            mBillingUpdatesListener.onPurchasesUpdated(mPurchases);
-//        } else if (resultCode == BillingResponse.USER_CANCELED) {
-//            Log.i(TAG, "onPurchasesUpdated() - user cancelled the purchase flow - skipping");
-//        } else {
-//            Log.w(TAG, "onPurchasesUpdated() got unknown resultCode: " + resultCode);
-//        }
-//    }
 
     @Override
     public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
-//        if(getBillingClientResponseCode() == BillingClient.BillingResponseCode.OK){
+        if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
             for (Purchase purchase : purchases) {
                 handlePurchase(purchase);
             }
             mBillingUpdatesListener.onPurchasesUpdated(mPurchases);
-//        }else if(billingResult.getResponseCode()== BillingClient.BillingResponseCode.USER_CANCELED){
-//            Log.i(TAG, "onPurchasesUpdated() - user cancelled the purchase flow - skipping");
-//        } else {
-//            Log.w(TAG, "onPurchasesUpdated() got unknown resultCode: " + billingResult.getResponseCode());
-//        }
+        }else if(billingResult.getResponseCode()== BillingClient.BillingResponseCode.USER_CANCELED){
+            Log.i(TAG, "onPurchasesUpdated() - user cancelled the purchase flow - skipping");
+        } else {
+            Log.w(TAG, "onPurchasesUpdated() got unknown resultCode: " + billingResult.getResponseCode());
+        }
     }
 
     /**
@@ -315,8 +300,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 
         // Update the UI and purchases inventory with new list of purchases
         mPurchases.clear();
+        BillingResult billingResult=BillingResult.newBuilder().setResponseCode(BillingClient.BillingResponseCode.OK).build();
 
-        onPurchasesUpdated(null, result.getPurchasesList());
+        onPurchasesUpdated(billingResult, result.getPurchasesList());
     }
 
     /**
@@ -386,7 +372,6 @@ public class BillingManager implements PurchasesUpdatedListener {
     public void startServiceConnection(final Runnable executeOnSuccess) {
 
         mBillingClient.startConnection(new BillingClientStateListener() {
-            @SuppressLint("WrongConstant")
             @Override
             public void onBillingSetupFinished(BillingResult billingResult) {
                 Log.d(TAG, "Setup finished. Response code: " + billingResult.getResponseCode());
@@ -397,7 +382,8 @@ public class BillingManager implements PurchasesUpdatedListener {
                         executeOnSuccess.run();
                     }
                 }
-                mBillingClientResponseCode = billingResult.getResponseCode();
+                int responseCode=billingResult.getResponseCode();
+                mBillingClientResponseCode=responseCode;
             }
 
             @Override
